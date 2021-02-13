@@ -1,0 +1,45 @@
+/* Removes basic styling from browser */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(120deg, #f6d365, #fda085);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  font-size: 1.5rem;
+}
+
+header,
+form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  background: white;
+}
+
+/* 
+TODO:
+- box-sizing: 
+    https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
+- linear-gradient(120deg, #): 
+    https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf
+- min-height: 100vh;
+- vh / px / em /rem
+- display: flex; justify-content: center;
+- align-items: center;
+ */
