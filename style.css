@@ -32,6 +32,17 @@ form button {
   background: white;
 }
 
+form button {
+  color: #fda085;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: #fda085;
+  color: white;
+}
 /* 
 TODO:
 - box-sizing: 
@@ -42,4 +53,6 @@ TODO:
 - vh / px / em /rem
 - display: flex; justify-content: center;
 - align-items: center;
+- cursor: pointer;
+- transition: all 0.3s ease
  */
