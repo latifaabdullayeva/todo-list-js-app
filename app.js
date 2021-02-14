@@ -10,7 +10,6 @@ todoButton.addEventListener("click", addTodo);
 function addTodo(event) {
   // Prevent form from submitting
   event.preventDefault();
-  console.log("hello");
   // Create Todo DIV
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
@@ -21,7 +20,17 @@ function addTodo(event) {
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
   // Create Delete Button
+  const deleteTodoBtn = document.createElement("button");
+  deleteTodoBtn.classList.add("delete-btn");
+  // deleteTodoBtn.createElement('<i class="fas fa-trash"></i>'); or as alternative:
+  deleteTodoBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  // append check button to the DIV
+  todoDiv.appendChild(deleteTodoBtn);
   // Create Checked Button
+  const checkedTodoBtn = document.createElement("button");
+  checkedTodoBtn.classList.add("check-btn");
+  checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
+  todoDiv.appendChild(checkedTodoBtn);
 
   /* Should look like this:
   <div class="todo-container">
