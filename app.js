@@ -15,7 +15,8 @@ function addTodo(event) {
   todoDiv.classList.add("todo");
   // Create Todo LI
   const newTodo = document.createElement("li");
-  newTodo.innerText = "hey";
+  // Grab the value of todo-input
+  newTodo.innerText = todoInput.value;
   newTodo.classList.add("todo-item");
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
@@ -33,6 +34,8 @@ function addTodo(event) {
   todoDiv.appendChild(deleteTodoBtn);
   // Append to UL Todo-List
   todoList.appendChild(todoDiv);
+  // Clear todo-input value
+  todoInput.value = "";
 
   /* Should look like this:
   <div class="todo-container">
