@@ -19,6 +19,11 @@ function addTodo(event) {
   newTodo.classList.add("todo-item");
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
+  // Create Checked Button
+  const checkedTodoBtn = document.createElement("button");
+  checkedTodoBtn.classList.add("check-btn");
+  checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
+  todoDiv.appendChild(checkedTodoBtn);
   // Create Delete Button
   const deleteTodoBtn = document.createElement("button");
   deleteTodoBtn.classList.add("delete-btn");
@@ -26,11 +31,8 @@ function addTodo(event) {
   deleteTodoBtn.innerHTML = '<i class="fas fa-trash"></i>';
   // append check button to the DIV
   todoDiv.appendChild(deleteTodoBtn);
-  // Create Checked Button
-  const checkedTodoBtn = document.createElement("button");
-  checkedTodoBtn.classList.add("check-btn");
-  checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
-  todoDiv.appendChild(checkedTodoBtn);
+  // Append to UL Todo-List
+  todoList.appendChild(todoDiv);
 
   /* Should look like this:
   <div class="todo-container">
