@@ -63,11 +63,15 @@ function addTodo(event) {
 
 function deleteCheckTodo(event) {
   const item = event.target;
-  console.log(item.parentElement);
   // DELETE todo block (div)
   if (item.classList[0] === "delete-btn") {
     const todo = item.parentElement;
-    todo.remove();
+    // Adds animation when todo is deleted
+    todo.classList.add("fall");
+    // It will end untill transition is finished and then remove the item
+    todo.addEventListener("transitionend", () => {
+      todo.remove();
+    });
   }
 
   // CHECK click on check to mark  todo as completed
@@ -82,5 +86,6 @@ function deleteCheckTodo(event) {
 - event.preventDefault();
 - item.parentElement;
 - item.remove();
-- classList.toggle
+- classList.toggle VS classList.add
+- transitionend event
 */
