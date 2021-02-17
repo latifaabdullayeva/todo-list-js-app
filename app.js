@@ -5,6 +5,7 @@ const todoList = document.querySelector(".todo-list");
 
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
+todoList.addEventListener("click", deleteCheckTodo);
 
 // Functions
 function addTodo(event) {
@@ -15,9 +16,9 @@ function addTodo(event) {
   todoDiv.classList.add("todo");
   // Create Todo LI
   const newTodo = document.createElement("li");
+  newTodo.classList.add("todo-item");
   // Grab the value of todo-input
   newTodo.innerText = todoInput.value;
-  newTodo.classList.add("todo-item");
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
   // Create Checked Button
@@ -41,9 +42,13 @@ function addTodo(event) {
   <div class="todo-container">
     <ul class="todo-list">
       <div class="todo">
-        <li class="item"></li>
-        <button>Delete</button>
-        <button>Checked</button>
+        <li class="todo-item"></li>
+        <button class="check-btn">
+          <i class="fas fa-check"></i>
+        </button>
+        <button class="delete-btn">
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
       <div class="todo">
         <li></li>
@@ -56,7 +61,26 @@ function addTodo(event) {
   */
 }
 
+function deleteCheckTodo(event) {
+  const item = event.target;
+  console.log(item.parentElement);
+  // DELETE todo block (div)
+  if (item.classList[0] === "delete-btn") {
+    const todo = item.parentElement;
+    todo.remove();
+  }
+
+  // CHECK click on check to mark  todo as completed
+  if (item.classList[0] === "check-btn") {
+    const todo = item.parentElement;
+    todo.classList.toggle("item-checked");
+  }
+}
+
 /*
 - .addEventListener("click", someFunc); // more than click
 - event.preventDefault();
+- item.parentElement;
+- item.remove();
+- classList.toggle
 */
