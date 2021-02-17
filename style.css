@@ -84,6 +84,21 @@ form button:hover {
   background: rgb(73, 204, 73);
 }
 
+.todo-item {
+  padding: 0rem 0.5rem;
+}
+
+/* You cannot click on icon anymore*/
+.fa-trash,
+.fa-check {
+  pointer-events: none;
+}
+
+.item-checked {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 /* 
 TODO:
 - box-sizing: 
