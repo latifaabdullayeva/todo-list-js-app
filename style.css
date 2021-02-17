@@ -102,6 +102,7 @@ form button:hover {
 .fall {
   transform: translateY(10rem) rotateZ(20deg);
   opacity: 0.1;
+  transition: 0.3s;
 }
 
 /* 
