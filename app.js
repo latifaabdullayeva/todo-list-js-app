@@ -23,6 +23,8 @@ function addTodo(event) {
   newTodo.innerText = todoInput.value;
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
+  // Add todo to local storage
+  saveLocalTodos(todoInput.value);
   // Create Checked Button
   const checkedTodoBtn = document.createElement("button");
   checkedTodoBtn.classList.add("check-btn");
@@ -108,6 +110,18 @@ function filterTodo(event) {
         todo.style.display = "flex";
     }
   });
+}
+
+function saveLocalTodos(todo) {
+  // CHECK if my local todo storage is empty
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 /*
