@@ -2,10 +2,12 @@
 const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter-todo");
 
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheckTodo);
+filterOption.addEventListener("click", filterTodo);
 
 // Functions
 function addTodo(event) {
@@ -81,6 +83,30 @@ function deleteCheckTodo(event) {
   }
 }
 
+function filterTodo(event) {
+  const todos = todoList.childNodes;
+  todos.forEach(function (todo) {
+    switch (event.target.value) {
+      case "all":
+        todo.style.display = "flex";
+        break;
+      case "completed":
+        if (todo.classList.contains("item-checked")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+        break;
+      case "uncompleted":
+        if (!todo.classList.contains("item-checked")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+    }
+  });
+}
+
 /*
 - .addEventListener("click", someFunc); // more than click
 - event.preventDefault();
@@ -88,4 +114,7 @@ function deleteCheckTodo(event) {
 - item.remove();
 - classList.toggle VS classList.add
 - transitionend event
+
+
+The "change" event is fired for <input>, <select>, and <textarea> elements when a change to the element's value is committed by the user.
 */
