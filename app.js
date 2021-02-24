@@ -4,6 +4,8 @@ const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
 
+// Attach event listeners to a Window for local storage
+document.addEventListener("DOMContentLoaded", getTodos);
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheckTodo);
@@ -23,7 +25,7 @@ function addTodo(event) {
   newTodo.innerText = todoInput.value;
   // To stick LI inside DIV that we have created
   todoDiv.appendChild(newTodo);
-  // Add todo to local storage
+  // Save todo to local storage
   saveLocalTodos(todoInput.value);
   // Create Checked Button
   const checkedTodoBtn = document.createElement("button");
@@ -122,6 +124,42 @@ function saveLocalTodos(todo) {
   }
   todos.push(todo);
   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function getTodos() {
+  // CHECK if my local todo storage is empty
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  todos.forEach(function (todo) {
+    // Create Todo DIV
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("todo");
+    // Create Todo LI
+    const newTodo = document.createElement("li");
+    newTodo.classList.add("todo-item");
+    // Grab the value of todo-input
+    newTodo.innerText = todo; // parameter todo
+    // To stick LI inside DIV that we have created
+    todoDiv.appendChild(newTodo);
+    // Create Checked Button
+    const checkedTodoBtn = document.createElement("button");
+    checkedTodoBtn.classList.add("check-btn");
+    checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
+    todoDiv.appendChild(checkedTodoBtn);
+    // Create Delete Button
+    const deleteTodoBtn = document.createElement("button");
+    deleteTodoBtn.classList.add("delete-btn");
+    // deleteTodoBtn.createElement('<i class="fas fa-trash"></i>'); or as alternative:
+    deleteTodoBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    // append check button to the DIV
+    todoDiv.appendChild(deleteTodoBtn);
+    // Append to UL Todo-List
+    todoList.appendChild(todoDiv);
+  });
 }
 
 /*
