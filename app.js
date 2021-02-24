@@ -103,6 +103,9 @@ function filterTodo(event) {
         } else {
           todo.style.display = "none";
         }
+        break;
+      default:
+        todo.style.display = "flex";
     }
   });
 }
@@ -115,6 +118,10 @@ function filterTodo(event) {
 - classList.toggle VS classList.add
 - transitionend event
 
-
+- CHANGE:
 The "change" event is fired for <input>, <select>, and <textarea> elements when a change to the element's value is committed by the user.
+
+- CASE: BREAK
+When JavaScript reaches a break keyword, it breaks out of the switch block. This will stop the execution inside the switch block. 
+It is not necessary to break the last case in a switch block. The block breaks (ends) there anyway.
 */
