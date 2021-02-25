@@ -74,6 +74,7 @@ function deleteCheckTodo(event) {
     const todo = item.parentElement;
     // Adds animation when todo is deleted
     todo.classList.add("fall");
+    removeLocalTodos(todo);
     // It will end untill transition is finished and then remove the item
     todo.addEventListener("transitionend", () => {
       todo.remove();
@@ -162,6 +163,19 @@ function getTodos() {
   });
 }
 
+function removeLocalTodos(todo) {
+  // CHECK if my local todo storage is empty
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+  const todoIndex = todos.indexOf(todo.children[0].innerText);
+  todos.splice(todoIndex, 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 /*
 - .addEventListener("click", someFunc); // more than click
 - event.preventDefault();
@@ -169,6 +183,7 @@ function getTodos() {
 - item.remove();
 - classList.toggle VS classList.add
 - transitionend event
+- splice()
 
 - CHANGE:
 The "change" event is fired for <input>, <select>, and <textarea> elements when a change to the element's value is committed by the user.
