@@ -14,7 +14,33 @@ filterOption.addEventListener("change", filterTodo);
 // Save todos in the local storage of browser
 let localTodos;
 
-// Functions
+function createTodoDIV(newTodoVal) {
+  // Create Todo DIV
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+  // Create Todo LI
+  const newTodo = document.createElement("li");
+  newTodo.classList.add("todo-item");
+  // Grab the value of todo-input
+  newTodo.innerText = newTodoVal;
+  // To stick LI inside DIV that we have created
+  todoDiv.appendChild(newTodo);
+  // Create Checked Button
+  const checkedTodoBtn = document.createElement("button");
+  checkedTodoBtn.classList.add("check-btn");
+  checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
+  todoDiv.appendChild(checkedTodoBtn);
+  // Create Delete Button
+  const deleteTodoBtn = document.createElement("button");
+  deleteTodoBtn.classList.add("delete-btn");
+  // deleteTodoBtn.createElement('<i class="fas fa-trash"></i>'); or as alternative:
+  deleteTodoBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  // append check button to the DIV
+  todoDiv.appendChild(deleteTodoBtn);
+  // Append to UL Todo-List
+  todoList.appendChild(todoDiv);
+}
+
 function addTodo(event) {
   // Prevent form from submitting
   event.preventDefault();
@@ -38,7 +64,6 @@ function deleteCheckTodo(event) {
       todo.remove();
     });
   }
-
   // CHECK click on check to mark  todo as completed
   if (item.classList[0] === "check-btn") {
     const todo = item.parentElement;
@@ -73,6 +98,17 @@ function filterTodo(event) {
   });
 }
 
+function checkLocalTodo() {
+  // CHECK if my local todo storage is empty
+  if (localStorage.getItem("localTodos") === null) {
+    localTodos = [];
+  } else {
+    localTodos = JSON.parse(localStorage.getItem("localTodos"));
+  }
+  console.log(localTodos);
+  return localTodos;
+}
+
 function saveLocalTodos(todo) {
   checkLocalTodo();
   localTodos.push(todo);
@@ -91,44 +127,6 @@ function removeLocalTodos(todo) {
   const todoIndex = localTodos.indexOf(todo.children[0].innerText);
   localTodos.splice(todoIndex, 1);
   localStorage.setItem("localTodos", JSON.stringify(localTodos));
-}
-
-function checkLocalTodo() {
-  // CHECK if my local todo storage is empty
-  if (localStorage.getItem("localTodos") === null) {
-    localTodos = [];
-  } else {
-    localTodos = JSON.parse(localStorage.getItem("localTodos"));
-  }
-  console.log(localTodos);
-  return localTodos;
-}
-
-function createTodoDIV(newTodoVal) {
-  // Create Todo DIV
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo");
-  // Create Todo LI
-  const newTodo = document.createElement("li");
-  newTodo.classList.add("todo-item");
-  // Grab the value of todo-input
-  newTodo.innerText = newTodoVal;
-  // To stick LI inside DIV that we have created
-  todoDiv.appendChild(newTodo);
-  // Create Checked Button
-  const checkedTodoBtn = document.createElement("button");
-  checkedTodoBtn.classList.add("check-btn");
-  checkedTodoBtn.innerHTML = '<i class="fas fa-check"></i>';
-  todoDiv.appendChild(checkedTodoBtn);
-  // Create Delete Button
-  const deleteTodoBtn = document.createElement("button");
-  deleteTodoBtn.classList.add("delete-btn");
-  // deleteTodoBtn.createElement('<i class="fas fa-trash"></i>'); or as alternative:
-  deleteTodoBtn.innerHTML = '<i class="fas fa-trash"></i>';
-  // append check button to the DIV
-  todoDiv.appendChild(deleteTodoBtn);
-  // Append to UL Todo-List
-  todoList.appendChild(todoDiv);
 }
 
 /*
