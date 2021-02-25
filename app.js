@@ -46,28 +46,6 @@ function addTodo(event) {
   todoList.appendChild(todoDiv);
   // Clear todo-input value
   todoInput.value = "";
-
-  /* Should look like this:
-  <div class="todo-container">
-    <ul class="todo-list">
-      <div class="todo">
-        <li class="todo-item"></li>
-        <button class="check-btn">
-          <i class="fas fa-check"></i>
-        </button>
-        <button class="delete-btn">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-      <div class="todo">
-        <li></li>
-        <button>Delete</button>
-        <button>Checked</button>
-      </div>
-      ...
-    </ul>
-  </div>;
-  */
 }
 
 function deleteCheckTodo(event) {
@@ -186,4 +164,26 @@ The "change" event is fired for <input>, <select>, and <textarea> elements when 
 - CASE: BREAK
 When JavaScript reaches a break keyword, it breaks out of the switch block. This will stop the execution inside the switch block. 
 It is not necessary to break the last case in a switch block. The block breaks (ends) there anyway.
+*/
+
+/* Should look like this:
+<div class="todo-container">
+  <ul class="todo-list">
+    <div class="todo">
+      <li class="todo-item"></li>
+      <button class="check-btn">
+        <i class="fas fa-check"></i>
+      </button>
+      <button class="delete-btn">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+    <div class="todo">
+      <li></li>
+      <button>Delete</button>
+      <button>Checked</button>
+    </div>
+    ...
+  </ul>
+</div>;
 */
