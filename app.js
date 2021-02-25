@@ -8,16 +8,26 @@ const filterOption = document.querySelector(".filter-todo");
 document.addEventListener("DOMContentLoaded", getTodos);
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
-todoList.addEventListener("click", deleteCheckTodo);
+todoList.addEventListener("click", actionOnTodo);
 filterOption.addEventListener("change", filterTodo);
 
 // Save todos in the local storage of browser
 let localTodos;
+let localChecked;
 
 function createTodoDIV(newTodoVal) {
   // Create Todo DIV
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
+
+  // If localChecked exists and there are marked items, cross item over
+  if (
+    localStorage.localChecked &&
+    localStorage.localChecked.includes(newTodoVal)
+  ) {
+    todoDiv.classList.toggle("item-checked");
+  }
+
   // Create Todo LI
   const newTodo = document.createElement("li");
   newTodo.classList.add("todo-item");
@@ -51,23 +61,32 @@ function addTodo(event) {
   todoInput.value = "";
 }
 
-function deleteCheckTodo(event) {
+function actionOnTodo(event) {
   const item = event.target;
+  deleteTodo(item);
+  markTodo(item);
+}
+
+function deleteTodo(triggeredItem) {
   // DELETE todo block (div)
-  if (item.classList[0] === "delete-btn") {
-    const todo = item.parentElement;
+  if (triggeredItem.classList[0] === "delete-btn") {
+    const todo = triggeredItem.parentElement;
     // Adds animation when todo is deleted
     todo.classList.add("fall");
     removeLocalTodos(todo);
-    // It will end untill transition is finished and then remove the item
+    // It will end untill transition is finished and then remove the triggeredItem
     todo.addEventListener("transitionend", () => {
       todo.remove();
     });
   }
-  // CHECK click on check to mark  todo as completed
-  if (item.classList[0] === "check-btn") {
-    const todo = item.parentElement;
+}
+
+function markTodo(triggeredItem) {
+  // MARK todo as completed
+  if (triggeredItem.classList[0] === "check-btn") {
+    const todo = triggeredItem.parentElement;
     todo.classList.toggle("item-checked");
+    saveLocalMarkedTodos(todo.childNodes[0].innerText);
   }
 }
 
@@ -105,8 +124,6 @@ function checkLocalTodo() {
   } else {
     localTodos = JSON.parse(localStorage.getItem("localTodos"));
   }
-  console.log(localTodos);
-  return localTodos;
 }
 
 function saveLocalTodos(todo) {
