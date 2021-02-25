@@ -11,6 +11,9 @@ todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteCheckTodo);
 filterOption.addEventListener("change", filterTodo);
 
+// Save todos in the local storage of browser
+let localTodos;
+
 // Functions
 function addTodo(event) {
   // Prevent form from submitting
@@ -116,26 +119,14 @@ function filterTodo(event) {
 }
 
 function saveLocalTodos(todo) {
-  // CHECK if my local todo storage is empty
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
-  todos.push(todo);
-  localStorage.setItem("todos", JSON.stringify(todos));
+  checkLocalTodo();
+  localTodos.push(todo);
+  localStorage.setItem("localTodos", JSON.stringify(localTodos));
 }
 
 function getTodos() {
-  // CHECK if my local todo storage is empty
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
-  todos.forEach(function (todo) {
+  checkLocalTodo();
+  localTodos.forEach(function (todo) {
     // Create Todo DIV
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
@@ -164,18 +155,22 @@ function getTodos() {
 }
 
 function removeLocalTodos(todo) {
-  // CHECK if my local todo storage is empty
-  let todos;
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
-  }
-  const todoIndex = todos.indexOf(todo.children[0].innerText);
-  todos.splice(todoIndex, 1);
-  localStorage.setItem("todos", JSON.stringify(todos));
+  checkLocalTodo();
+  const todoIndex = localTodos.indexOf(todo.children[0].innerText);
+  localTodos.splice(todoIndex, 1);
+  localStorage.setItem("localTodos", JSON.stringify(localTodos));
 }
 
+function checkLocalTodo() {
+  // CHECK if my local todo storage is empty
+  if (localStorage.getItem("localTodos") === null) {
+    localTodos = [];
+  } else {
+    localTodos = JSON.parse(localStorage.getItem("localTodos"));
+  }
+  console.log(localTodos);
+  return localTodos;
+}
 /*
 - .addEventListener("click", someFunc); // more than click
 - event.preventDefault();
