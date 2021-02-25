@@ -19,6 +19,15 @@ function createTodoDIV(newTodoVal) {
   // Create Todo DIV
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
+
+  // If localChecked exists and there are marked items, cross item over
+  if (
+    localStorage.localChecked &&
+    localStorage.localChecked.includes(newTodoVal)
+  ) {
+    todoDiv.classList.toggle("item-checked");
+  }
+
   // Create Todo LI
   const newTodo = document.createElement("li");
   newTodo.classList.add("todo-item");
