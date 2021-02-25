@@ -19,15 +19,6 @@ function createTodoDIV(newTodoVal) {
   // Create Todo DIV
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
-
-  // If localChecked exists and there are marked items, cross item over
-  if (
-    localStorage.localChecked &&
-    localStorage.localChecked.includes(newTodoVal)
-  ) {
-    todoDiv.classList.toggle("item-checked");
-  }
-
   // Create Todo LI
   const newTodo = document.createElement("li");
   newTodo.classList.add("todo-item");
@@ -130,6 +121,39 @@ function saveLocalTodos(todo) {
   checkLocalTodo();
   localTodos.push(todo);
   localStorage.setItem("localTodos", JSON.stringify(localTodos));
+}
+
+function checkLocalMarkedTodos() {
+  // CHECK if my local Marked todo storage is empty
+  if (localStorage.getItem("localChecked") === null) {
+    localChecked = [];
+  } else {
+    localChecked = JSON.parse(localStorage.getItem("localChecked"));
+  }
+}
+
+function saveLocalMarkedTodos(markedTodo) {
+  checkLocalMarkedTodos();
+  todoList.childNodes.forEach(function (todo) {
+    if (
+      todo.classList.contains("item-checked") &&
+      !localChecked.includes(markedTodo) &&
+      markedTodo
+    ) {
+      localChecked.push(markedTodo);
+      localStorage.setItem("localChecked", JSON.stringify(localChecked));
+    }
+    if (
+      !todo.classList.contains("item-checked") &&
+      todo.children[0].innerText === markedTodo
+    ) {
+      const index = localChecked.indexOf(markedTodo);
+      localChecked.splice(index, 1);
+      localStorage.setItem("localChecked", JSON.stringify(localChecked));
+      // After removing element from todos, nothing is marked anymore
+      markedTodo = "";
+    }
+  });
 }
 
 function getTodos() {
